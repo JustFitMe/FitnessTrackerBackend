@@ -17,7 +17,7 @@ async function createUser({
     INSERT INTO users(username, password)
     VALUES($1, $2)
     ON CONFLICT (username) DO NOTHING
-    RETURNING *;
+    RETURNING id, username;
     `, [username, hashedPassword]);
 
     return user;
@@ -29,15 +29,20 @@ async function createUser({
 async function getUser({ username, password }) {
   try {
     const user = await getUserByUsername(username);
+    console.log(user);
     const hashedPassword = user.password;
+
     let passwordsMatch = await bcrypt.compare(password, hashedPassword);
+
     if (!passwordsMatch) {
       console.log('passwords do not match');
       return;
     } else {
       const {rows: [user] } = await client.query(`
-        SELECT id, username FROM users;
-      `);
+        SELECT id, username FROM users
+        WHERE username=$1
+      `, [username]);
+      console.log(user);
       return user;
     }
   } catch (error) {
@@ -67,14 +72,14 @@ async function getUserByUsername(userName) {
   try {
     const {rows: [user]} = await client.query(`
       SELECT id, username, password FROM users
-      WHERE username=$1
+      WHERE userName=$1
     `, [userName]);
   
     if (user.length === 0) {
       console.log('could not find user');
       return;
     }
-    
+
     return user;
   } catch (error) {
     console.log(error);
