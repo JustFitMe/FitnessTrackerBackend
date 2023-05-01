@@ -1,6 +1,7 @@
 
 const client = require("./client");
 const bcrypt = require("bcrypt");
+const SALT_COUNT = 10;
 
 // database functions
 
@@ -10,15 +11,14 @@ async function createUser({
   password 
 }) {
   try {
+    const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
+    // let userToAdd = {username, hashedPassword};
     const { rows: [user] } = await client.query(`
     INSERT INTO users(username, password)
     VALUES($1, $2)
     ON CONFLICT (username) DO NOTHING
     RETURNING *;
     `, [username, password]);
-    const SALT_COUNT = 10;
-
-const hashedPassword = await bcrypt.hash(password, SALT_COUNT)
 
     return user;
   } catch (error) {

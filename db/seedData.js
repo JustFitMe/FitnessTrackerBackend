@@ -1,5 +1,6 @@
 // require in the database adapter functions as you write them (createUser, createActivity...)
 // const { } = require('./');
+const { Client } = require('pg');
 const client = require("./client")
 const { createUser } = require("./users")
 
@@ -9,6 +10,9 @@ async function dropTables() {
 
     await client.query(`
     
+    DROP TABLE IF EXISTS routine_activities;
+    DROP TABLE IF EXISTS routines;
+    DROP TABLE IF EXISTS activities;
     DROP TABLE IF EXISTS users;
     `);
 
@@ -31,7 +35,29 @@ async function createTables() {
         id SERIAL PRIMARY KEY,
         username varchar(255) UNIQUE NOT NULL,
         password varchar(255) NOT NULL
-      
+      );
+
+      CREATE TABLE activities (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) UNIQUE NOT NULL,
+        description TEXT NOT NULL
+      );
+
+      CREATE TABLE routines (
+        id SERIAL PRIMARY KEY,
+        "creatorId" INTEGER REFERENCES users(Id),
+        "isPublic" BOOLEAN DEFAULT false,
+        name VARCHAR(255) UNIQUE NOT NULL,
+        goal TEXT NOT NULL
+      );
+
+      CREATE TABLE routine_activities (
+        id SERIAL PRIMARY KEY,
+        "routineId" INTEGER REFERENCES routines(Id),
+        "activityId" INTEGER REFERENCES activities(Id),
+        duration INTEGER,
+        count INTEGER,
+        UNIQUE ("routineId", "activityId")
       );
     `);
 
