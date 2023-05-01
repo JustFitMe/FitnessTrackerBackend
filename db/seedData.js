@@ -1,6 +1,7 @@
 // require in the database adapter functions as you write them (createUser, createActivity...)
 // const { } = require('./');
 const client = require("./client")
+const { createUser } = require("./users")
 
 async function dropTables() {
   try {
@@ -52,6 +53,7 @@ DO NOT CHANGE ANYTHING BELOW. This is default seed data, and will help you start
 async function createInitialUsers() {
   console.log("Starting to create users...")
   try {
+    
     const usersToCreate = [
       { username: "albert", password: "bertie99" },
       { username: "sandra", password: "sandra123" },
