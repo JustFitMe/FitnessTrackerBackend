@@ -18,7 +18,7 @@ async function createUser({
     VALUES($1, $2)
     ON CONFLICT (username) DO NOTHING
     RETURNING *;
-    `, [username, password]);
+    `, [username, hashedPassword]);
 
     return user;
   } catch (error) {
