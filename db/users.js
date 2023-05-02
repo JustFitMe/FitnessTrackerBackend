@@ -24,7 +24,7 @@ async function createUser({
 async function getUser({ username, password }) {
   try {
     const user = await getUserByUsername(username);
-    console.log(user);
+    // console.log(user);
     const hashedPassword = user.password;
     let passwordsMatch = await bcrypt.compare(password, hashedPassword);
     if (!passwordsMatch) {
@@ -35,7 +35,7 @@ async function getUser({ username, password }) {
         SELECT id, username FROM users
         WHERE username=$1
       `, [username]);
-      console.log(user);
+      // console.log(user);
       return user;
     }
   } catch (error) {
