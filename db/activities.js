@@ -2,31 +2,111 @@ const client = require('./client');
 
 // database functions
 async function createActivity({ name, description }) {
-  // return the new activity
+  try {
+    const { rows: [activity] } = await client.query(`
+      INSERT INTO activities(name, description)
+      VALUES($1, $2)
+      RETURNING *;
+    `, [name, description]);
+
+    return activity;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Unable to create activity');
+  }
 }
 
 async function getAllActivities() {
-  // select and return an array of all activities
+  try {
+    const { rows: activities } = await client.query(`
+      SELECT * FROM activities;
+    `);
+
+    return activities;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-async function getActivityById(id) {}
+async function getActivityById(id) {
+  try {
+    const { rows: [activity] } = await client.query(`
+      SELECT * FROM activities
+      WHERE id = $1;
+    `, [id]);
 
-async function getActivityByName(name) {}
+    return activity;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-// used as a helper inside db/routines.js
-async function attachActivitiesToRoutines(routines) {}
+async function getActivityByName(name) {
+  try {
+    const { rows: [activity] } = await client.query(`
+      SELECT * FROM activities
+      WHERE name = $1;
+    `, [name]);
+
+    return activity;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function attachActivitiesToRoutines(routines) {
+  try {
+    const routineIds = routines.map((routine) => routine.id);
+    const { rows: activities } = await client.query(`
+      SELECT *
+      FROM routine_activities
+      JOIN activities ON routine_activities."activityId" = activities.id
+      WHERE routine_activities."routineId" IN (${routineIds.join(', ')});
+    `);
+
+    const activitiesByRoutineId = activities.reduce((result, activity) => {
+      const { routineId, ...activityData } = activity;
+      if (!result[routineId]) {
+        result[routineId] = [];
+      }
+      result[routineId].push(activityData);
+      return result;
+    }, {});
+
+    routines.forEach((routine) => {
+      routine.activities = activitiesByRoutineId[routine.id] || [];
+    });
+
+    return routines;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 async function updateActivity({ id, ...fields }) {
-  // don't try to update the id
-  // do update the name and description
-  // return the updated activity
+  try {
+    const setString = Object.keys(fields)
+      .map((key, index) => `"${key}"=$${index + 2}`)
+      .join(', ');
+
+    const { rows: [activity] } = await client.query(`
+      UPDATE activities
+      SET ${setString}
+      WHERE id=$1
+      RETURNING *;
+    `, [id, ...Object.values(fields)]);
+
+    return activity;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = {
+  createActivity,
   getAllActivities,
   getActivityById,
   getActivityByName,
   attachActivitiesToRoutines,
-  createActivity,
   updateActivity,
 };
