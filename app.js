@@ -9,7 +9,6 @@ app.use(cors())
 app.use(morgan('dev'));
 app.use(express.json());
 
-
 app.use((req, res, next) => {
     console.log(req.body);
     next();
@@ -32,6 +31,5 @@ app.get('/', function(request, response) {
   const listener = app.listen(process.env.PORT, function() {
     console.log('Your app is listening on port ' + listener.address().port);
   });
-
 
 module.exports = app;
