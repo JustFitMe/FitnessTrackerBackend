@@ -6,6 +6,16 @@ const morgan = require('morgan');
 const cors = require('cors')
 
 app.use(cors())
+app.use(morgan('dev'));
+app.use(express.json());
+
+
+app.use((req, res, next) => {
+    console.log(req.body);
+    next();
+});
+
+app.use('/api', apiRouter);
 
 // No CORS Headder set
 app.get('/', function(request, response) {
@@ -23,15 +33,5 @@ app.get('/', function(request, response) {
     console.log('Your app is listening on port ' + listener.address().port);
   });
 
-app.use(morgan('dev'));
-app.use(express.json());
-
-
-app.use((req, res, next) => {
-    console.log(req.body);
-    next();
-});
-
-app.use('/api', apiRouter);
 
 module.exports = app;
