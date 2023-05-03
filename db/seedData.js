@@ -1,8 +1,6 @@
 // require in the database adapter functions as you write them (createUser, createActivity...)
-// const { } = require('./');
-const { Client } = require('pg');
+const { createUser, createActivity, createRoutine, getRoutinesWithoutActivities, getAllActivities, addActivityToRoutine} = require('./');
 const client = require("./client")
-const { createUser } = require("./users")
 
 async function dropTables() {
   try {

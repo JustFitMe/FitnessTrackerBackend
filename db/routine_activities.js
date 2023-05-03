@@ -37,7 +37,7 @@ async function getRoutineActivitiesByRoutine({ id }) {
       SELECT * FROM routine_activities
       WHERE "routineId" = $1;
     `, [id]);
-
+    
     return routineActivities;
   } catch (error) {
     console.error(error);
