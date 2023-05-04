@@ -2,7 +2,7 @@ const express = require('express');
 // const app = require('../app');
 const activitiesRouter = express.Router();
 const { getAllActivities, createActivity, getActivityById, getActivityByName, updateActivity, getPublicRoutinesByActivity } = require('../db');
-const { id_ID } = require('faker/lib/locales');
+
 
 activitiesRouter.get('/', async(req, res, next) => {
     try {
@@ -46,7 +46,7 @@ activitiesRouter.post('/', async(req, res, next) => {
 
 activitiesRouter.patch('/:activityId', async (req, res, next) => {
     const {activityId} = req.params;
-    console.log(activityId);
+    // console.log(activityId);
     const _activity = await getActivityById(activityId);
 
     if (!_activity) {
@@ -78,7 +78,7 @@ activitiesRouter.patch('/:activityId', async (req, res, next) => {
             });
         } else {
             const updatedActivity = await updateActivity({id: activityId, name, description});
-            console.log(updatedActivity)
+            // console.log(updatedActivity)
             res.send(updatedActivity);
         }
 
@@ -88,11 +88,25 @@ activitiesRouter.patch('/:activityId', async (req, res, next) => {
 });
 
 activitiesRouter.get('/:activityId/routines', async (req, res, next) => {
-    const activityId = req.params;
-    const publicRoutinesWithActivity = await getPublicRoutinesByActivity({activityId});
-
-
-    return publicRoutinesWithActivity;
+    
+const {activityId} = req.params;
+console.log('activity id ------->', activityId)
+    try { 
+        const activity = await getActivityById(activityId);
+        console.log('activity------>', activity);
+        if (!activity) {
+            next({
+                error: 'error',
+                name: 'ActivityDoesNotExistError',
+                message: 'Activity ' + activityId + ' not found'
+            });
+        } 
+        const publicRoutinesWithActivity = await getPublicRoutinesByActivity({id: activityId});
+        res.send(publicRoutinesWithActivity);
+    } catch (error) {
+        next(error);
+    }
+    
 });
 // GET /api/activities/:activityId/routines
 
