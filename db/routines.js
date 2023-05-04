@@ -11,7 +11,7 @@ async function createRoutine({ creatorId, isPublic, name, goal }) {
     `, [creatorId, isPublic, name, goal]);
     return routine; 
   } catch (error) {
-    console.error(error);
+    throw new Error('Unable to create routine');
   }
 }
 
@@ -23,7 +23,7 @@ async function getRoutineById(id) {
     `, [id]);
     return routine; 
   } catch (error) {
-    console.error(error);
+    throw new Error('Unable to get routine by id');
   }
 }
 
@@ -34,7 +34,7 @@ async function getRoutinesWithoutActivities() {
     `);
     return routine; 
   } catch (error) {
-    console.error(error);
+    throw new Error('Unable to get routines without activities');
   }
 }
 
@@ -49,7 +49,7 @@ async function getAllRoutines() {
     );
     return await attachActivitiesToRoutines(routines);
   } catch (error) {
-    console.error(error);
+    throw new Error('Unable to get all routines');
   }
 }
 
@@ -63,7 +63,7 @@ async function getAllPublicRoutines() {
     `);
     return await attachActivitiesToRoutines(routines);
   } catch (error) {
-    console.error(error);
+    throw new Error('Unable to get all public routines');
   }
 }
 
@@ -79,7 +79,7 @@ async function getAllRoutinesByUser({ username }) {
     `, [userId]);
     return await attachActivitiesToRoutines(routines);
   } catch (error) {
-    console.error(error);
+    throw new Error('Unable to get all routines by user');
   }
 }
 
@@ -95,7 +95,7 @@ async function getPublicRoutinesByUser({ username }) {
     `, [userId]);
     return await attachActivitiesToRoutines(routines);
   } catch (error) {
-    console.error(error);
+    throw new Error('Unable to get public routines by user');
   }
 }
 
@@ -111,7 +111,7 @@ async function getPublicRoutinesByActivity({ id }) {
     `, [id]);
     return await attachActivitiesToRoutines(routines);
   } catch (error) {
-    console.error(error);
+    throw new Error('Unable to get public routines by activity');
   }
 }
 
