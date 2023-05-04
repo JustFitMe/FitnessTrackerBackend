@@ -114,20 +114,27 @@ async function attachActivitiesToRoutines(routines) {
   // }
 }
 
-async function updateActivity( id, fields ) {
+async function updateActivity({ id, ...fields }) {
+  console.log('in db fiels -------->',fields);
   try {
     const setString = Object.keys(fields)
       .map((key, index) => `"${key}"=$${index + 2}`)
       .join(', ');
+    //   const { rows: [updatedActivity] } = await client.query(`
+    //   UPDATE activities
+    //   SET ${setString}
+    //   WHERE id=${id}
+    //   RETURNING *;
+    // `, Object.values(fields));
 
-    const { rows: [activity] } = await client.query(`
+    const { rows: [updatedActivity] } = await client.query(`
       UPDATE activities
       SET ${setString}
       WHERE id=$1
       RETURNING *;
     `, [id, ...Object.values(fields)]);
 
-    return activity;
+    return updatedActivity;
   } catch (error) {
     console.log(error);
   }

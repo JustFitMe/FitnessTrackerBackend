@@ -2,6 +2,7 @@ const express = require('express');
 // const app = require('../app');
 const activitiesRouter = express.Router();
 const { getAllActivities, createActivity, getActivityById, getActivityByName, updateActivity, getPublicRoutinesByActivity } = require('../db');
+const { id_ID } = require('faker/lib/locales');
 
 activitiesRouter.get('/', async(req, res, next) => {
     try {
@@ -57,16 +58,16 @@ activitiesRouter.patch('/:activityId', async (req, res, next) => {
     }
 
     const {name, description} = req.body;
-    const updateFields = {};
+    // const updateFields = {};
         
-    if (name) {
-        updateFields.name = name;
-    }
+    // if (name) {
+    //     updateFields.name = name;
+    // }
     
-    if (description) {
-        updateFields.description = description;
-    }
-
+    // if (description) {
+    //     updateFields.description = description;
+    // }
+   
     try {
         const __activity = await getActivityByName(name);
         if (__activity) {
@@ -76,13 +77,13 @@ activitiesRouter.patch('/:activityId', async (req, res, next) => {
                 message: 'An activity with name ' + name + ' already exists'
             });
         } else {
-            const updatedActivity = await updateActivity(activityId, updateFields);
+            const updatedActivity = await updateActivity({id: activityId, name, description});
             console.log(updatedActivity)
             res.send(updatedActivity);
         }
 
-    } catch ({name, message}) {
-        next({name, message})
+    } catch (error) {
+        next(error);
     }
 });
 
