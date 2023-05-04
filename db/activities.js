@@ -11,7 +11,6 @@ async function createActivity({ name, description }) {
 
     return activity;
   } catch (error) {
-    console.log(error);
     throw new Error('Unable to create activity');
   }
 }
@@ -115,7 +114,7 @@ async function attachActivitiesToRoutines(routines) {
   // }
 }
 
-async function updateActivity({ id, ...fields }) {
+async function updateActivity( id, fields ) {
   try {
     const setString = Object.keys(fields)
       .map((key, index) => `"${key}"=$${index + 2}`)
