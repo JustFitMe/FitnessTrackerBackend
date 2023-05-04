@@ -115,7 +115,7 @@ async function attachActivitiesToRoutines(routines) {
 }
 
 async function updateActivity({ id, ...fields }) {
-  console.log('in db fiels -------->',fields);
+  // console.log('in db fiels -------->',fields);
   try {
     const setString = Object.keys(fields)
       .map((key, index) => `"${key}"=$${index + 2}`)
