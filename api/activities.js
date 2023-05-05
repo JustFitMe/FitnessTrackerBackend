@@ -90,7 +90,7 @@ activitiesRouter.patch('/:activityId', async (req, res, next) => {
 activitiesRouter.get('/:activityId/routines', async (req, res, next) => {
     
 const {activityId} = req.params;
-console.log('activity id ------->', activityId)
+// console.log('activity id ------->', activityId)
     try { 
         const activity = await getActivityById(activityId);
         // console.log('activity------>', activity);
@@ -101,6 +101,7 @@ console.log('activity id ------->', activityId)
                 message: 'Activity ' + activityId + ' not found'
             });
         } 
+        // console.log({id: activityId})
         const publicRoutinesWithActivity = await getPublicRoutinesByActivity({id: activityId});
         res.send(publicRoutinesWithActivity);
     } catch (error) {
