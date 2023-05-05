@@ -93,7 +93,7 @@ const {activityId} = req.params;
 console.log('activity id ------->', activityId)
     try { 
         const activity = await getActivityById(activityId);
-        console.log('activity------>', activity);
+        // console.log('activity------>', activity);
         if (!activity) {
             next({
                 error: 'error',
