@@ -63,10 +63,6 @@ async function getUserByUsername(userName) {
       SELECT id, username, password FROM users
       WHERE userName=$1
     `, [userName]);
-    if (user.length === 0) {
-      console.log('could not find user');
-      return;
-    }
     return user;
   } catch (error) {
     console.log(error);
