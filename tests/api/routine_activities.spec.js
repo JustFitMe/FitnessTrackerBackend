@@ -22,7 +22,7 @@ const {
   UnauthorizedDeleteError,
 } = require("../../errors");
 
-const { objectContaining } = expect;
+const { objectContaining } = expect
 
 describe("/api/routine_activities", () => {
   describe("PATCH /api/routine_activities/:routineActivityId (**)", () => {
