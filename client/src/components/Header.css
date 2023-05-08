@@ -1,0 +1,22 @@
+#header {
+    display:flex;
+    margin: 0;
+    padding: 0 20px;
+    color: white;
+    background-color: black;
+    align-items: center;
+    justify-content: space-between;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    padding: 5px 0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    border-bottom: 2px solid orange;
+}
