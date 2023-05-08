@@ -98,7 +98,7 @@ router.post('/:routineId/activities', requireUser, async (req, res, next) => {
             const routine = await addActivityToRoutine({routineId, activityId, count, duration});
             if (routine) {
 
-                console.log(routine);
+                // console.log(routine);
                 res.send(routine);
             } else {
                 next({
