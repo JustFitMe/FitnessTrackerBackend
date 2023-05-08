@@ -14,7 +14,7 @@ Initialize Database
 
 Run Seed Script
 
-    npm run seed:dev
+    
 
 ## Automated Tests
 
