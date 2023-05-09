@@ -1,21 +1,32 @@
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/api";
 
-const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, }) => {
+
+const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, token }) => {
     // console.log(user, isLoggedIn)
+
+    const navigate = useNavigate();
 
     const handleLogin = async(event) => {
         event.preventDefault();
-        console.log({username, password});
-        const newresponse = await loginUser({username, password});
-        console.log(newresponse);
-        // const userToAuth={user:{username,password}};
-        // const data = createUser(userToAuth);
-        // if (data.token) {
-        //     setToken(data.token);
-        //     setUser(data);
-        //     setIsLoggedIn(true);
+        // console.log({username, password});
+        const data = await loginUser({username, password});
+        console.log('data--->' , data);
+
+        if (data.token) {
+            setUser(data.user);
+            setToken(data.token);
+            setIsLoggedIn(true);
         }
+        console.log(user)
+        console.log(token)
+        console.log(isLoggedIn);
+
+        // setUsername('');
+        // setPassword('');
+        navigate('/me');
+        }
+        
         return (
             <>
         <div>

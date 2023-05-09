@@ -9,10 +9,13 @@ const Register = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUserna
         console.log({username, password});
         const newresponse = await registerUser({username, password});
         console.log(newresponse);
+        setUsername('');
+        setPassword('');
     }
         
         return (
             <>
+            
         <div>
             <label>
                 <input type='text' placeholder="username" onChange={(event) => setUsername(event.target.value)} required/>

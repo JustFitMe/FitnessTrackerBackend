@@ -65,7 +65,11 @@ export const loginUser = async (userObj) => {
             },
             body: JSON.stringify(userObj)
         });
-        console.log(await response.json());
+        const data = await response.json();
+        console.log(data);
+        return data;
+        // console.log('i want this->',await response.json());
+
     } catch (error) {
         console.error(error);
     }
