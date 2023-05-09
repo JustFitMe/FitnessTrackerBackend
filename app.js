@@ -12,13 +12,13 @@ client.connect();
 app.use(cors())
 app.use(morgan('dev'));
 app.use(express.json());
-let count=0
+// let count=0
 app.use((req, res, next) => {
-    if (req) {
-        count +=1;
-    }
-    console.log(count)
-    console.log(req.body);
+    // if (req) {
+    //     count +=1;
+    // }
+    // console.log(count)
+    // console.log(req.body);
     next();
 });
 
