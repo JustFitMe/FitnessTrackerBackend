@@ -32,29 +32,29 @@ router.patch('/routine_activities/:routineActivityId', async (req, res, next) =>
         });
     }
   });
-
-// DELETE /api/routine_activities/:routineActivityId
-router.delete('/:routineId', requireUser, async (req, res, next) => {
+  router.delete('/routine_activities/:routineActivityId', requireUser, async (req, res, next) => {
     const { routineActivityId } = req.params;
     const routineActivity = await getRoutineActivityById(routineActivityId);
-    console.log(routineActivity);
     const routine = await getRoutineById(routineActivity.routineId);
-
+  
     try {
-        if (routineActivity && routine.creatorId == req.user.id) {
-            await destroyRoutineActivity(routineActivityId);
-            res.send(routineActivity);
-        } else {
-            res.status(403);
-            next({
-                error: 'error',
-                message: 'User ' + req.user.username + ' is not allowed to delete On even days',
-                name: 'UpdateError'
-            }); 
-        }
+      // Check if routine activity exists
+      if (!routineActivity) {
+        throw new NotFoundError('Routine activity not found');
+      }
+  
+      // Check if user is the owner of the routine
+      if (routine.creatorId !== req.user.id) {
+        res.status(403);
+        throw new Error('Only the owner of the routine can delete a routine activity');
+      }
+  
+      await destroyRoutineActivity(routineActivityId);
+      res.send(routineActivity);
     } catch (error) {
-        next(error);
+      next(error);
     }
-})
+  });
+  
 
 module.exports = router;
