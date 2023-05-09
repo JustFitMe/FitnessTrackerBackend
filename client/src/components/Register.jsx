@@ -3,7 +3,6 @@ import { registerUser } from '../api/api';
 
 
 const Register = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, }) => {
-    // console.log(user, isLoggedIn)
 
     const handleRegister = async(event) => {
         event.preventDefault();

@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../api/api";
 
 const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, }) => {
     // console.log(user, isLoggedIn)
 
     const handleLogin = async(event) => {
         event.preventDefault();
-        console.log('thanks for attempting to login - but this feature is not ready yet');
+        console.log({username, password});
+        const newresponse = await loginUser({username, password});
+        console.log(newresponse);
         // const userToAuth={user:{username,password}};
         // const data = createUser(userToAuth);
         // if (data.token) {

@@ -16,11 +16,11 @@ const App = () => {
 
         const getData = async () => {
             const fetchedRoutines = await getPublicRoutines();
-            const fetchedUser = await getUser();
+
             // setPublicRoutines(fetchedRoutines.filter(routine => routine.isPublic))
 
             setPublicRoutines(fetchedRoutines);
-            setUser(fetchedUser);
+
         }
         getData();
 }, [])
