@@ -27,3 +27,45 @@ export const getPublicRoutines = async () => {
 //         console.error(error)
 //     }
 // }
+
+export const getUser = async () => {
+    try {
+        const response = await fetch('/api/users');
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+export const registerUser = async (userObj) => {
+    try {
+        const response = await fetch('/api/users/register', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userObj)
+        });
+        console.log(await response.json());
+        
+        // const {success, error, data} = await response.json();
+        // if (success) {
+        //     const {token, message} = data;
+        //     localStorage.setItem('token', token);
+        //     console.log(success, error, data);
+        //     return {token, message};
+        // }
+        // if(!success) {
+        //     const {name, message} = data;
+        //     console.log(success, error, data);
+        //     return {name, message};
+        // }
+        // console.log(success,error,data);
+        
+    } catch (error) {
+        console.error(error);
+    }
+}

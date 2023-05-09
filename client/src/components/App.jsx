@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import {Header, Routines} from './index';
-import { getPublicRoutines } from '../api/api';
+import {Header, Routines, Users, Register, Login} from './index';
+import { getPublicRoutines, getUser } from '../api/api';
 
 
 const App = () => {
     // const [routines, setRoutines] = useState([]);
     const [publicRoutines, setPublicRoutines] = useState([])
+    const [user, setUser] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [token, setToken] = useState('');
     useEffect(() => {
 
         const getData = async () => {
             const fetchedRoutines = await getPublicRoutines();
+            const fetchedUser = await getUser();
             // setPublicRoutines(fetchedRoutines.filter(routine => routine.isPublic))
 
             setPublicRoutines(fetchedRoutines);
+            setUser(fetchedUser);
         }
         getData();
 }, [])
-       console.log(publicRoutines);
+    //    console.log(publicRoutines);
+
 return (
 
     <div>
         <Header />
         <Routes>
-            <Route path='/' element={<h1>This is my home!!!!</h1>}></Route>
+            <Route path='/' element={<Users user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
+            <Route path='/register' element={<Register user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
+            <Route path='/login' element={<Login user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route path='/routines' element={<Routines publicRoutines={publicRoutines} />}></Route>
             <Route path='/my-routines' element={<h1>This is my routines</h1>}></Route>
             <Route path='/activities' element={<h1>This is activities</h1>}></Route>
