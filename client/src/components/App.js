@@ -1,31 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import {Header, Routines} from './index';
+import { getRoutines } from '../api/api';
 
 
 const App = () => {
-    // const [routines, setRoutines] = useState([]);
-// useEffect(() => {
+    const [routines, setRoutines] = useState([]);
+    useEffect(() => {
 
-//     const getRoutines = async () => {
-//         try {
-//             const response = await fetch('http://localhost:8080/api/routines');
-    
-//             const data = await response.json();
-//             console.log(data);
-            
-//         } catch (error) {
-//             console.error(error)
-//         }
-//     }
-//     getUsers();
-// }, [])
+        const getData = async () => {
+            const fetchedRoutines = await getRoutines();
+            setRoutines(fetchedRoutines);
+        }
+        getData();
+}, [])
+       console.log(routines);
 return (
 
     <div>
         <Header />
         <Routes>
-            <Route path='/' element={<h1>hello</h1>}></Route>
+            <Route path='/' element={<Routines routines={routines} setRoutines={setRoutines}/>}></Route>
             <Route path='/routines' element={<h1>This is routines</h1>}></Route>
             <Route path='/my-routines' element={<h1>This is my routines</h1>}></Route>
             <Route path='/activities' element={<h1>This is activities</h1>}></Route>
