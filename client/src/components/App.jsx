@@ -20,7 +20,7 @@ return (
     <div>
         <Header />
         <Routes>
-            <Route path='/' element={<h1>This is my home</h1>}></Route>
+            <Route path='/' element={<h1>This is my home!!!!</h1>}></Route>
             <Route path='/routines' element={<Routines routines={routines} />}></Route>
             <Route path='/my-routines' element={<h1>This is my routines</h1>}></Route>
             <Route path='/activities' element={<h1>This is activities</h1>}></Route>
