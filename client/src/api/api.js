@@ -68,7 +68,6 @@ export const loginUser = async (userObj) => {
         const data = await response.json();
         console.log(data);
         return data;
-        // console.log('i want this->',await response.json());
 
     } catch (error) {
         console.error(error);

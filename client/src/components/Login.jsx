@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/api";
 
-
+//for some reason you have to click login twice in order to setUser, setToken, setIsLoggedIn...
+//which is bad because then if you navigate to /me, you're not logged in
 const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, token }) => {
     // console.log(user, isLoggedIn)
 
@@ -12,14 +13,16 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
         // console.log({username, password});
         const data = await loginUser({username, password});
         console.log('data--->' , data);
-
+        console.log('data.token--->' , data.token);
+        
         if (data.token) {
             setUser(data.user);
+            localStorage.setItem('token', data.token);
             setToken(data.token);
             setIsLoggedIn(true);
         }
-        console.log(user)
-        console.log(token)
+        console.log(user);
+        console.log(token);
         console.log(isLoggedIn);
 
         // setUsername('');
