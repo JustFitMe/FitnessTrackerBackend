@@ -28,16 +28,16 @@ export const getPublicRoutines = async () => {
 //     }
 // }
 
-export const getUser = async () => {
-    try {
-        const response = await fetch('/api/users');
-        const data = await response.json();
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error(error);
-    }
-}
+// export const getUser = async () => {
+//     try {
+//         const response = await fetch('/api/users');
+//         const data = await response.json();
+//         console.log(data);
+//         return data;
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 
 
 export const registerUser = async (userObj) => {
@@ -71,6 +71,25 @@ export const loginUser = async (userObj) => {
 
         return data;
 
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const getUserRoutines = async (token) => {
+    try {
+      
+        const response = await fetch('/:username/routines', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            
+        });
+        const data = await response.json();
+        console.log(data);
+        return data;
     } catch (error) {
         console.error(error);
     }

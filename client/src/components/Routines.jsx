@@ -19,18 +19,20 @@ import { Navigate, useNavigate } from 'react-router-dom';
 // be able to update the duration or count of any activity on the routine
 // be able to remove any activity from the routine
 
-const Routines = ({publicRoutines}) => {
-
+const Routines = ({publicRoutines, isLoggedIn, user}) => {
     const navigate = useNavigate();
-    console.log(publicRoutines);
+    const navigationLink = '/' + user.username + '/routines'
     
     const handleNavigate = () => {
-        navigate('/my-routines');
+        navigate(navigationLink);
     }
+
     return (
         <>
         <h2> All Public Routines</h2>
+        {isLoggedIn &&
         <button onClick={handleNavigate}>My Routines</button>
+        }
         
       
         {publicRoutines.length &&
@@ -38,8 +40,10 @@ const Routines = ({publicRoutines}) => {
             return (
                 
             <div key={routine.id}>
-                <h1>{routine.name}</h1>
-                <p>{routine.goal}</p>
+                <p>Name: {routine.name}</p>
+                <p>Goal: {routine.goal}</p>
+                <p>Creator ID: {routine.creatorId}</p>
+                <br/>
             </div>
                 
             )

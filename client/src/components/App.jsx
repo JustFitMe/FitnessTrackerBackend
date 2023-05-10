@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import {Header, Routines, Home, Register, Login, Profile, MyRoutines} from './index';
-import { getPublicRoutines, getUser } from '../api/api';
+import { getPublicRoutines, getUserRoutines } from '../api/api';
 
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [token, setToken] = useState('');
+    const [userRoutines, setUserRoutines] = useState([]);
     useEffect(() => {
 
         const getData = async () => {
@@ -25,7 +26,7 @@ const App = () => {
         getData();
 }, [])
        console.log(publicRoutines);
-
+       const navigationLink = '/' + user.username + '/routines'
 return (
 
     <div>
@@ -35,8 +36,8 @@ return (
             <Route path='/register' element={<Register user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route path='/login' element={<Login token={token} user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route path='/me' element={<Profile user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
-            <Route path='/routines' element={<Routines publicRoutines={publicRoutines} />}></Route>
-            <Route path='/my-routines' element={<MyRoutines isLoggedIn={isLoggedIn} />}></Route>
+            <Route path='/routines' element={<Routines publicRoutines={publicRoutines} user={user} isLoggedIn={isLoggedIn}/>}></Route>
+            <Route path={navigationLink} element={<MyRoutines isLoggedIn={isLoggedIn} user={user} userRoutines={userRoutines} setUserRoutines={setUserRoutines}/>}></Route>
             <Route path='/activities' element={<h1>This is activities</h1>}></Route>
         </Routes>
     </div>
