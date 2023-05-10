@@ -22,7 +22,7 @@ router.patch('/routine_activities/:routineActivityId', async (req, res, next) =>
   
       // Update routine_activity
       const updatedRoutineActivity = await updateRoutineActivity({id: routineActivityId, count, duration });
-    //   console.log(updatedRoutineActivity);
+      console.log(updatedRoutineActivity);
       res.send( updatedRoutineActivity );
     } catch (err) {
         next({
