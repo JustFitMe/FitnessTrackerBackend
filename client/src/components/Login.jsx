@@ -18,11 +18,10 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
             localStorage.setItem('token', data.token);
             setToken(data.token);
             setIsLoggedIn(true);
+            console.log(user);
+            console.log(token);
+            console.log(isLoggedIn);
         }
-        console.log(user);
-        console.log(token);
-        console.log(isLoggedIn);
-
         // setUsername('');
         // setPassword('');
         navigate('/me');

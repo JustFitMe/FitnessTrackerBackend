@@ -27,7 +27,7 @@ const Header = () => {
         //     setUser(data);
         //     setIsLoggedIn(true);
         }
-        
+
     return (
         <div id='header'>
             <h1>Fitness Tracker</h1>
@@ -35,9 +35,7 @@ const Header = () => {
                 
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/routines">Routines</NavLink>
-                <NavLink to="/my-routines">My Routines</NavLink>
                 <NavLink to="/activities">Activities</NavLink>
-                <NavLink to="/routine-activities">Routine Activities</NavLink>
                 {/* <NavLink to="/register">Sign Up</NavLink>
                 <NavLink to="/login">Sign In</NavLink> */}
             <button type="submit" onClick={handleLogin}>Login</button>

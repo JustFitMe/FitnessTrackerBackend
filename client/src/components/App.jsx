@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import {Header, Routines, Home, Register, Login, Profile} from './index';
+import {Header, Routines, Home, Register, Login, Profile, MyRoutines} from './index';
 import { getPublicRoutines, getUser } from '../api/api';
 
 
@@ -36,9 +36,8 @@ return (
             <Route path='/login' element={<Login token={token} user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route path='/me' element={<Profile user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route path='/routines' element={<Routines publicRoutines={publicRoutines} />}></Route>
-            <Route path='/my-routines' element={<h1>This is my routines</h1>}></Route>
+            <Route path='/my-routines' element={<MyRoutines isLoggedIn={isLoggedIn} />}></Route>
             <Route path='/activities' element={<h1>This is activities</h1>}></Route>
-            <Route path='/routine-activities' element={<h1>This is routine activities</h1>}></Route>
         </Routes>
     </div>
 

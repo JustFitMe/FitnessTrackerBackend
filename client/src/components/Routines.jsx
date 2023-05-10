@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 // As any user on the Routines tab, I want to:
 
@@ -20,12 +21,16 @@ import React, { useEffect } from 'react';
 
 const Routines = ({publicRoutines}) => {
 
+    const navigate = useNavigate();
     console.log(publicRoutines);
     
-    
+    const handleNavigate = () => {
+        navigate('/my-routines');
+    }
     return (
         <>
         <h2> All Public Routines</h2>
+        <button onClick={handleNavigate}>My Routines</button>
         {publicRoutines.map(routine => {
             return (
                 
