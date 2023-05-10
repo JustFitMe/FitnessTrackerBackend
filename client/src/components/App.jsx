@@ -24,7 +24,7 @@ const App = () => {
         }
         getData();
 }, [])
-    //    console.log(publicRoutines);
+       console.log(publicRoutines);
 
 return (
 

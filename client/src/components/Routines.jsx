@@ -31,7 +31,10 @@ const Routines = ({publicRoutines}) => {
         <>
         <h2> All Public Routines</h2>
         <button onClick={handleNavigate}>My Routines</button>
-        {publicRoutines.map(routine => {
+        
+      
+        {publicRoutines.length &&
+        publicRoutines.map(routine => {
             return (
                 
             <div key={routine.id}>
@@ -41,6 +44,7 @@ const Routines = ({publicRoutines}) => {
                 
             )
         })}
+        
         </>
     )
     

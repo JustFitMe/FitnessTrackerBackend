@@ -4,7 +4,7 @@ export const getPublicRoutines = async () => {
 
         const data = await response.json();
 
-        // console.log(data);
+        console.log(data);
         return data;
     } catch (error) {
         console.error(error)
@@ -58,6 +58,7 @@ export const registerUser = async (userObj) => {
 
 export const loginUser = async (userObj) => {
     try {
+        console.log(userObj);
         const response = await fetch('/api/users/login', {
             method: "POST",
             headers: {

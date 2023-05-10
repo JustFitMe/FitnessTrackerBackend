@@ -52,7 +52,7 @@ usersRouter.post("/register", async (req, res, next) => {
 // POST /api/users/login
 usersRouter.post("/login", async (req, res, next) => {
     const { username, password } = req.body;
-
+    console.log( { username, password }  )
     if (!username || !password) {
         next({
             name: "MissingCredentialsError",
@@ -62,10 +62,10 @@ usersRouter.post("/login", async (req, res, next) => {
 
     try {
         const user = await getUser({ username, password });
-
-        const token = await jwt.sign(user, process.env.JWT_SECRET);
-
+        console.log('user in user api--->', user);
+        
         if (user) {
+            const token = await jwt.sign(user, process.env.JWT_SECRET);
             res.send({
                 message: "you're logged in!",
                 token: token,

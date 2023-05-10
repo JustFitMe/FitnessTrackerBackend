@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 
 //Use this port 3000-When Viewing the fron end data switch to 5433 when running system test. 
-const connectionString = process.env.DATABASE_URL || 'https://localhost:5433/fitness-dev';
+const connectionString = process.env.DATABASE_URL || 'https://localhost:5432/fitness-dev';
 
 const client = new Pool({
   connectionString,
