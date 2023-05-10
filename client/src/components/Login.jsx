@@ -10,7 +10,7 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
         event.preventDefault();
         // console.log({username, password});
         const data = await loginUser({username, password});
-        console.log('data--->' , data);
+        // console.log('data--->' , data);
         console.log('data.token--->' , data.token);
         
         if (data.token) {
@@ -18,9 +18,9 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
             localStorage.setItem('token', data.token);
             setToken(data.token);
             setIsLoggedIn(true);
-            console.log(user);
-            console.log(token);
-            console.log(isLoggedIn);
+            // console.log(user);
+            // console.log(token);
+            // console.log(isLoggedIn);
         }
         // setUsername('');
         // setPassword('');

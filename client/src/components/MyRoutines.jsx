@@ -2,19 +2,19 @@ import { React, useEffect } from 'react';
 import { getPublicRoutines, getUserRoutines } from '../api/api';
 
 const MyRoutines = ({isLoggedIn, setUserRoutines, userRoutines}) => {
-    useEffect(() => {
+//     useEffect(() => {
 
-        const getData = async () => {
-            const fetchedRoutines = await getUserRoutines();
-            console.log(fetchedRoutines)
-            // setPublicRoutines(fetchedRoutines.filter(routine => routine.isPublic))
+//         const getData = async () => {
+//             const fetchedRoutines = await getUserRoutines();
+//             console.log(fetchedRoutines)
+//             // setPublicRoutines(fetchedRoutines.filter(routine => routine.isPublic))
 
-            setUserRoutines(fetchedRoutines);
+//             setUserRoutines(fetchedRoutines);
 
-        }
-        getData();
-}, [])
-console.log(userRoutines);
+//         }
+//         getData();
+// }, [])
+// console.log(userRoutines);
     return (
         <>
         {isLoggedIn ?
