@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+
 const { getRoutineActivityById, updateRoutineActivity, destroyRoutineActivity, getRoutineById, NotFoundError } = require('../db');
 const { requireUser } = require('./utils');
 const { UnauthorizedUpdateError, UnauthorizedDeleteError } = require('../errors');
 
+// PATCH /api/routine_activities/:routineActivityId
 router.patch('/:routineActivityId', requireUser, async (req, res, next) => {
   try {
     const { routineActivityId } = req.params;
