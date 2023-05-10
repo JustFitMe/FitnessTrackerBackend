@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 // be able to log out if I am logged in
 // see tabbed navigation for Routines, My Routines (once logged in), and Activities (with matching routes)
 // 
-const Users = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, }) => {
+const Home = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, }) => {
     // console.log(user, isLoggedIn)
     // const navigate = useNavigate();
     // const handleLogin = async (event) => {
@@ -51,10 +51,10 @@ const Users = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
             {/* <button type="submit" onClick={handleLogin}>Login</button>
             <button type="submit" onClick={handleRegister}>Register</button> */}
         </div>
-        <h1>This is User Page - which we should probably rename to home</h1>
+        <h1>This is Home Page</h1>
         </>
     );
 }
 
 
-export default Users;
+export default Home;
