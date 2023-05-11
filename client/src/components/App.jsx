@@ -12,22 +12,22 @@ const App = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [token, setToken] = useState('');
-    const [userRoutines, setUserRoutines] = useState([]);
+    // const [userRoutines, setUserRoutines] = useState([]);
     useEffect(() => {
 
         const getData = async () => {
             const fetchedRoutines = await getPublicRoutines();
-            // const userRoutines = await getUserRoutines(user.username, token);
+            // const userRoutines = await getUserRoutines(token);
             // console.log('userRoutines--->', userRoutines)
             // setPublicRoutines(fetchedRoutines.filter(routine => routine.isPublic))
 
             setPublicRoutines(fetchedRoutines);
-
+            // setUserRoutines(userRoutines);
         }
         getData();
 }, [])
     //    console.log(publicRoutines);
-       const navigationLink = '/' + user.username + '/routines'
+       
 return (
 
     <div>
@@ -38,7 +38,7 @@ return (
             <Route path='/login' element={<Login token={token} user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route path='/me' element={<Profile user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route path='/routines' element={<Routines token={token} publicRoutines={publicRoutines} setPublicRoutines={setPublicRoutines} user={user} isLoggedIn={isLoggedIn}/>}></Route>
-            <Route path={navigationLink} element={<MyRoutines isLoggedIn={isLoggedIn} user={user} userRoutines={userRoutines} setUserRoutines={setUserRoutines}/>}></Route>
+            <Route path='/:username/routines' element={<MyRoutines isLoggedIn={isLoggedIn} user={user} token={token}/>}></Route>
             <Route path='/activities' element={<h1>This is activities33</h1>}></Route>
         </Routes>
     </div>

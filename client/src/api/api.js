@@ -1,10 +1,12 @@
+// import {useParams} from 'react-router-dom';
+
 export const getPublicRoutines = async () => {
     try {
         const response = await fetch('/api/routines');
-
+        console.log('response------>',response)
         const data = await response.json();
 
-        console.log(data);
+        // console.log(data);
         return data;
     } catch (error) {
         console.error(error)
@@ -76,10 +78,11 @@ export const loginUser = async (userObj) => {
     }
 }
 
-export const getUserRoutines = async () => {
+export const getUserRoutines = async (username, token) => {
     try {
-        // const link = '/:' + username + '/routines'
-        const response = await fetch('/:username/routines', {
+        console.log('username and token', username, token)
+        
+        const response = await fetch(`/api/users/${username}/routines`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

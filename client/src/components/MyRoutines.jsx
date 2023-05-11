@@ -1,26 +1,45 @@
-import { React, useEffect } from 'react';
+import { React, useEffect, useState } from 'react';
+import {useParams} from 'react-router-dom';
 import { getPublicRoutines, getUserRoutines } from '../api/api';
 
-const MyRoutines = ({isLoggedIn, setUserRoutines, userRoutines}) => {
-//     useEffect(() => {
+const MyRoutines = ({isLoggedIn, user, token}) => {
+    const {username} = useParams();
 
-//         const getData = async () => {
-//             const fetchedRoutines = await getUserRoutines();
-//             console.log(fetchedRoutines)
-//             // setPublicRoutines(fetchedRoutines.filter(routine => routine.isPublic))
+    const [userRoutines, setUserRoutines] = useState([]);
 
-//             setUserRoutines(fetchedRoutines);
+    useEffect(()=> {
+        const userRoutinesFuction = async (token) => {
+            const userRoutines = await getUserRoutines(username, token);
+            // console.log(userRoutines);
+            setUserRoutines(userRoutines)
+        }
+        userRoutinesFuction(token);
+    }, [])
 
-//         }
-//         getData();
-// }, [])
-// console.log(userRoutines);
+    console.log('userroutines--->',userRoutines);
     return (
         <>
-        {isLoggedIn ?
-        <h1>Hello these will be all my routines - with the ability to create edit and delete</h1>
-        : 
-        <h1>Please login to view your routines</h1>}
+        
+        {!isLoggedIn ?
+            <h1>Please login to view your routines</h1>
+            : 
+            <h1>All of {username}'s Routines</h1>
+        }
+        
+        {isLoggedIn && userRoutines.length && userRoutines != undefined && 
+            userRoutines.map(routine => {
+                return (
+                    
+                    <div key={routine.id}>
+                    <p>Name: {routine.name}</p>
+                    <p>Goal: {routine.goal}</p>
+                    <p>Creator ID: {routine.creatorId}</p>
+                    <br/>
+                </div>
+                    
+                    )
+                })}
+                
         {!userRoutines &&
             <p>You have no routines to display yet!</p>
         }

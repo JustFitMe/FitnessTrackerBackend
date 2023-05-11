@@ -75,7 +75,7 @@ const Routines = ({publicRoutines, setPublicRoutines, isLoggedIn, user, token}) 
         </div>
         </>
         }
-        {console.log(publicRoutines)}
+        {/* {console.log(publicRoutines)} */}
         {publicRoutines.length && publicRoutines != undefined && 
         publicRoutines.map(routine => {
             return (
