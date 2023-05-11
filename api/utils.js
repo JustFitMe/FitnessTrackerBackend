@@ -1,5 +1,6 @@
  
  const requireUser = ((req, res, next) => {
+    console.log('req.user----------->',req.user)
     if (!req.user) {
         next({
             error: 'error',

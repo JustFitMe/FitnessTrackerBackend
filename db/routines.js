@@ -29,9 +29,10 @@ async function getRoutineById(id) {
 
 async function getRoutinesWithoutActivities() {
     try {
-    const{rows: [routine]} = await client.query(`
+      const{rows: [routine]} = await client.query(`
       SELECT * FROM routines
-    `);
+      `);
+      console.log(routine);
     return routine; 
   } catch (error) {
     throw new Error('Unable to get routines without activities');

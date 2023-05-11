@@ -11,13 +11,13 @@ export const getPublicRoutines = async () => {
     }
 }
 //new Routine = {creatorId:creatorId, isPublic:T/F, name:'', goal:''}
-export const createRoutine = async (newRoutine) => {
+export const createRoutine = async (newRoutine, token) => {
     try {
         const response = await fetch('/api/routines', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
-                // 'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(newRoutine)
         });
@@ -67,7 +67,7 @@ export const loginUser = async (userObj) => {
             body: JSON.stringify(userObj)
         });
         const data = await response.json();
-        console.log(data);
+        // console.log('data in login user function------->',data);
 
         return data;
 
@@ -76,19 +76,19 @@ export const loginUser = async (userObj) => {
     }
 }
 
-export const getUserRoutines = async (token) => {
+export const getUserRoutines = async () => {
     try {
-      
+        // const link = '/:' + username + '/routines'
         const response = await fetch('/:username/routines', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            
         });
+        // console.log('result from getUserRoutines----->', await response.json)
         const data = await response.json();
-        console.log(data);
+        // console.log('data------------->',data);
         return data;
     } catch (error) {
         console.error(error);
