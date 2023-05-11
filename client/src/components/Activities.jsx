@@ -69,6 +69,7 @@ const Activities = () => {
   };
 
   return (
+    <>
     <div>
       <h2>Activities</h2>
       {activities.length === 0 ? (
@@ -110,6 +111,7 @@ const Activities = () => {
         <button type="submit">Add Activity</button>
       </form>
     </div>
+    </>
   );
 };
 

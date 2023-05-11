@@ -7,7 +7,6 @@ async function createUser({
   username,
   password
 }) {
-  // console.log(username, password)
   try {
     const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
     // let userToAdd = {username, hashedPassword};
@@ -17,7 +16,6 @@ async function createUser({
     ON CONFLICT (username) DO NOTHING
     RETURNING id, username;
     `, [username, hashedPassword]);
-    // console.log('user--------->', user)
     return user;
   } catch (error) {
     console.log (error);
