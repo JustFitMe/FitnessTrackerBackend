@@ -29,7 +29,7 @@ const http = require("http")
 const chalk = require("chalk")
 const app = require("./app")
 
-const PORT = process.env["PORT"] ?? 5433
+const PORT = process.env["PORT"] ?? 8080
 const server = http.createServer(app)
 
 server.listen(PORT, () => {

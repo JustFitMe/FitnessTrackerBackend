@@ -1,8 +1,9 @@
 import { React } from 'react';
-import { updateRoutine } from '../api/api'
+import { updateRoutine, deleteRoutine } from '../api/api'
+import { useNavigate } from 'react-router-dom';
 
-const SingleRoutine = ({token, isLoggedIn, singleRoutine, name, goal, setGoal, isPublic, setIsPublic, setName}) => {
-    
+const SingleRoutine = ({token, user, isLoggedIn, singleRoutine, name, goal, setGoal, isPublic, setIsPublic, setName}) => {
+    const navigate = useNavigate();
     const updateFields = {
         id:singleRoutine.id,
         creatorId:singleRoutine.creatorId,
@@ -22,8 +23,12 @@ const SingleRoutine = ({token, isLoggedIn, singleRoutine, name, goal, setGoal, i
     console.log('we are working on updating with your desired changes')
     updateRoutine(token, updateFields);
 }
-const handleDelete = () => {
+const handleDelete = async () => {
     console.log('we are working on deleting this routine')
+    console.log(singleRoutine.id, token)
+    await deleteRoutine(singleRoutine.id, token);
+    console.log('routine deleted');
+    navigate(`/${user.username}/routines`);
 }
 return (
     <>
