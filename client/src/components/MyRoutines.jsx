@@ -1,8 +1,9 @@
 import { React, useEffect, useState } from 'react';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import { getPublicRoutines, getUserRoutines } from '../api/api';
 
-const MyRoutines = ({isLoggedIn, user, token}) => {
+const MyRoutines = ({isLoggedIn, user, token, setSingleRoutine}) => {
+    const navigate = useNavigate();
     const {username} = useParams();
 
     const [userRoutines, setUserRoutines] = useState([]);
@@ -26,16 +27,20 @@ const MyRoutines = ({isLoggedIn, user, token}) => {
             <h1>All of {username}'s Routines</h1>
         }
         
-        {isLoggedIn && userRoutines.length && userRoutines != undefined && 
+        {isLoggedIn && userRoutines.length && 
             userRoutines.map(routine => {
                 return (
                     
                     <div key={routine.id}>
-                    <p>Name: {routine.name}</p>
-                    <p>Goal: {routine.goal}</p>
-                    <p>Creator ID: {routine.creatorId}</p>
-                    <br/>
-                </div>
+                        <button id={routine.id} onClick={()=>{
+                            setSingleRoutine(routine);
+                            navigate(`/:${routine.id}`);
+                        }}>&#9998;</button>
+                        <p>Name: {routine.name}</p>
+                        <p>Goal: {routine.goal}</p>
+                        <p>Creator ID: {routine.creatorId}</p>
+                        <br/>
+                    </div>
                     
                     )
                 })}

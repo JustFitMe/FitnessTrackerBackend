@@ -30,6 +30,25 @@ export const createRoutine = async (newRoutine, token) => {
     }
 }
 
+export const updateRoutine = async (token, {id, creatorId, isPublic, name, goal}) => {
+    // console.log(token, {id, creatorId, isPublic, name, goal})
+    try {
+        const response = await fetch(`/api/routines/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({id, creatorId, isPublic, name, goal})
+        })
+        const data = await response.json();
+        // console.log('data----->',data);
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 // export const getUser = async () => {
 //     try {
 //         const response = await fetch('/api/users');
