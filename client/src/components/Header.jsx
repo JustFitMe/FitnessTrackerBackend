@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {NavLink, useNavigate} from 'react-router-dom';
 import './Header.css';
 
@@ -28,6 +28,8 @@ const Header = ({isLoggedIn, setToken, setUser, setIsLoggedIn, user, token}) => 
         //     setIsLoggedIn(true);
         }
 
+   
+
     const handleLogout = async(event) => {
         event.preventDefault();
         localStorage.removeItem('token');
@@ -37,6 +39,7 @@ const Header = ({isLoggedIn, setToken, setUser, setIsLoggedIn, user, token}) => 
         console.log(token);
         console.log(user);
     }
+   
 
     return (
         <div id='header'>

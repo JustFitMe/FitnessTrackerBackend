@@ -11,7 +11,6 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
         const errorAlert = document.createElement("p")
         errorAlert.append("Please enter a valid username/password combination")
         if (!username || !password) {
-            // window.alert('Please enter a valid username/password combination')
             document.getElementById('loginForm').append(errorAlert)
         }
         const data = await loginUser({username, password});
