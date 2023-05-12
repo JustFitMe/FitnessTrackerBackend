@@ -4,7 +4,7 @@ import { createRoutine } from '../api/api';
 
 // As any user on the Routines tab, I want to:
 // see a list of all public routines showing:
-// The routine name, goal, and creator's username
+//**************************************** complete ****************************************// The routine name, goal, and creator's username
 // A list of activities for the routine, including their name, description, and duration and/or count
 
 // As a registered user on the My Routines tab, I want to:
@@ -12,8 +12,8 @@ import { createRoutine } from '../api/api';
 //**************************************** complete ****************************************// the form should have text fields for name and goal
 
 // for each routine which is owned by me I should
-// be able to update the name and goal for the routine
-// be able to delete the entire routine
+//**************************************** complete ****************************************// be able to update the name and goal for the routine
+//**************************************** complete ****************************************// be able to delete the entire routine
 // be able to add an activity to a routine via a small form which has a dropdown for all activities, an inputs for count and duration
 // be able to update the duration or count of any activity on the routine
 // be able to remove any activity from the routine
@@ -74,12 +74,13 @@ const Routines = ({publicRoutines, setPublicRoutines, isLoggedIn, user, token, s
         {/* {console.log(publicRoutines)} */}
         {publicRoutines.length && publicRoutines != undefined && 
         publicRoutines.map(routine => {
+            // setSingleRoutine(routine)
             return (
                 
             <div key={routine.id}>
                 <p>Name: {routine.name}</p>
                 <p>Goal: {routine.goal}</p>
-                <p>Creator ID: {routine.creatorId}</p>
+                <p>Creator ID: {routine.creatorName}</p>
                 <br/>
             </div>
                 

@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink, useNavigate} from 'react-router-dom';
 import './Header.css';
 
-const Header = ({isLoggedIn, setToken, setIsLoggedIn, token}) => {
+const Header = ({isLoggedIn, setToken, setUser, setIsLoggedIn, user, token}) => {
     const navigate = useNavigate();
 
     const handleLogin = async (event) => {
@@ -33,7 +33,9 @@ const Header = ({isLoggedIn, setToken, setIsLoggedIn, token}) => {
         localStorage.removeItem('token');
         setToken('');
         setIsLoggedIn(false);
+        setUser([]);
         console.log(token);
+        console.log(user);
     }
 
     return (

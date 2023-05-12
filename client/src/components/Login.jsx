@@ -8,10 +8,14 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
 
     const handleLogin = async(event) => {
         event.preventDefault();
-        // console.log({username, password});
+        const errorAlert = document.createElement("p")
+        errorAlert.append("Please enter a valid username/password combination")
+        if (!username || !password) {
+            // window.alert('Please enter a valid username/password combination')
+            document.getElementById('loginForm').append(errorAlert)
+        }
         const data = await loginUser({username, password});
-        // console.log('data--->' , data);
-        console.log('data.token--->' , data.token);
+        console.log('data--->' , data.username);
         
         if (data.token) {
             setUser(data.user);
@@ -21,15 +25,22 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
             // console.log(user);
             // console.log(token);
             // console.log(isLoggedIn);
+            navigate('/me');
         }
         // setUsername('');
         // setPassword('');
-        navigate('/me');
         }
         
         return (
-            <>
-        <div>
+        <>
+        <div id="loginForm">
+            
+            {/* {!username &&
+            <p>please enter a valid username</p>
+            }
+            {!password &&
+            <p>please enter a valid password</p>
+            } */}
             <label>
                 <input type='text' placeholder="username" onChange={(event) => setUsername(event.target.value)} required/>
             </label>
