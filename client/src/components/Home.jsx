@@ -1,6 +1,6 @@
 // As an unregistered visitor I want to:
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 //**************************************** complete ****************************************// see a Sign Up/Sign In form in the header/footer, on a tab (with or without matching route) or in a modal
 //**************************************** complete ****************************************// be able to sign up for a new account with valid username/password combination

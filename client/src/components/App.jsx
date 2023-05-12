@@ -37,7 +37,7 @@ return (
             <Route path='/me' element={<Profile user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route path='/routines' element={<Routines publicRoutines={publicRoutines} />}></Route>
             <Route path='/my-routines' element={<MyRoutines isLoggedIn={isLoggedIn} />}></Route>
-            <Route path='/activities' element={<h1>This is activities</h1>}></Route>
+            <Route path='/activities' element={<h1>This is acti55vities</h1>}></Route>
         </Routes>
     </div>
 
