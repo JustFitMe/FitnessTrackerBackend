@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {NavLink, useNavigate} from 'react-router-dom';
 import './Header.css';
 
-const Header = ({isLoggedIn, setToken, setUser, setIsLoggedIn, user, token}) => {
+const Header = ({isLoggedIn, username, setUsername, password, setPassword, setToken, setUser, setIsLoggedIn, user, token}) => {
     const navigate = useNavigate();
 
     const handleLogin = async (event) => {
@@ -32,12 +32,19 @@ const Header = ({isLoggedIn, setToken, setUser, setIsLoggedIn, user, token}) => 
 
     const handleLogout = async(event) => {
         event.preventDefault();
-        localStorage.removeItem('token');
         setToken('');
-        setIsLoggedIn(false);
         setUser([]);
+        setIsLoggedIn(false);
+        setUsername('');
+        setPassword('');
+
+        localStorage.removeItem('token');
+
         console.log(token);
         console.log(user);
+        console.log(isLoggedIn);
+
+        navigate('/');
     }
    
 
@@ -61,7 +68,7 @@ const Header = ({isLoggedIn, setToken, setUser, setIsLoggedIn, user, token}) => 
             <button type="submit" onClick={handleLogin}>Login</button>
             <button type="submit" onClick={handleRegister}>Register</button>
             </>
-        }
+            }
         </>
 
             </nav>

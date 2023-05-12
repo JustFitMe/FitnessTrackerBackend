@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/api";
+import { useEffect } from "react";
 
 const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, token }) => {
     // console.log(user, isLoggedIn)
@@ -10,12 +11,13 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
         event.preventDefault();
         const errorAlert = document.createElement("p")
         errorAlert.append("Please enter a valid username/password combination")
-        if (!username || !password) {
+        errorAlert.setAttribute('id', 'error')
+        if ((!username || !password) && !errorAlert) {
             document.getElementById('loginForm').append(errorAlert)
         }
         const data = await loginUser({username, password});
-        console.log('data--->' , data.username);
-        
+        console.log('data--->' , data.user.username);
+
         if (data.token) {
             setUser(data.user);
             localStorage.setItem('token', data.token);
@@ -26,20 +28,16 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
             // console.log(isLoggedIn);
             navigate('/me');
         }
-        // setUsername('');
         // setPassword('');
-        }
+    }
+    
+    useEffect(()=> {
+
+        },[user])
         
         return (
         <>
         <div id="loginForm">
-            
-            {/* {!username &&
-            <p>please enter a valid username</p>
-            }
-            {!password &&
-            <p>please enter a valid password</p>
-            } */}
             <label>
                 <input type='text' placeholder="username" onChange={(event) => setUsername(event.target.value)} required/>
             </label>

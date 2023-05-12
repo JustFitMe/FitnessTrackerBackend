@@ -3,7 +3,13 @@ import { Routes, Route } from 'react-router-dom';
 import {Header, Routines, Home, Register, Login, Profile, MyRoutines, SingleRoutine} from './index';
 import { getPublicRoutines, getUserRoutines } from '../api/api';
 
+// const user = [
+//     {id: 71, username: 'a'}
+// ]
+// setUser([])
+// const user =[
 
+// ]
 const App = () => {
     // const [routines, setRoutines] = useState([]);
     const [publicRoutines, setPublicRoutines] = useState([])
@@ -35,7 +41,7 @@ const App = () => {
 return (
 
     <div>
-        <Header user={user} token={token} setUser={setUser} setToken={setToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+        <Header user={user} username={username} password={password} setUsername={setUsername} setPassword={setPassword} token={token} setUser={setUser} setToken={setToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
         <Routes>
             <Route path='/' element={<Home user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route path='/register' element={<Register user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
