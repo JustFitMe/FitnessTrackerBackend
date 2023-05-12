@@ -116,3 +116,17 @@ export const getUserRoutines = async (username, token) => {
         console.error(error);
     }
 }
+
+export const deleteRoutine = async (routineId, token) => {
+    try {
+        await fetch (`/api/routines/${routineId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        })
+    } catch (error) {
+        console.error(error)
+    }
+}
