@@ -70,8 +70,12 @@ export const registerUser = async (userObj) => {
             },
             body: JSON.stringify(userObj)
         });
-        console.log(await response.json());
-        
+        //this (below) was to try to send the error message back so it could be displayed on the screen
+        // const data = await response.json();
+        // console.log(await response.json());
+        // if (data.error) {
+        //     return data;
+        // }
     } catch (error) {
         console.error(error);
     }
@@ -81,17 +85,16 @@ export const loginUser = async (userObj) => {
     try {
         console.log(userObj);
         const response = await fetch('/api/users/login', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userObj)
-        });
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userObj)
+            });
         const data = await response.json();
         // console.log('data in login user function------->',data);
 
-        return data;
-
+        return data; 
     } catch (error) {
         console.error(error);
     }

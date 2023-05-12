@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {NavLink, useNavigate} from 'react-router-dom';
 import './Header.css';
 
-const Header = ({isLoggedIn, setToken, setIsLoggedIn, token}) => {
+const Header = ({isLoggedIn, setToken, setUser, setIsLoggedIn, user, token}) => {
     const navigate = useNavigate();
 
     const handleLogin = async (event) => {
@@ -28,13 +28,18 @@ const Header = ({isLoggedIn, setToken, setIsLoggedIn, token}) => {
         //     setIsLoggedIn(true);
         }
 
+   
+
     const handleLogout = async(event) => {
         event.preventDefault();
         localStorage.removeItem('token');
         setToken('');
         setIsLoggedIn(false);
+        setUser([]);
         console.log(token);
+        console.log(user);
     }
+   
 
     return (
         <div id='header'>

@@ -3,12 +3,28 @@ import { registerUser } from '../api/api';
 
 
 const Register = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, }) => {
-
+    const navigate = useNavigate();
     const handleRegister = async(event) => {
         event.preventDefault();
-        console.log({username, password});
-        const newresponse = await registerUser({username, password});
-        console.log(newresponse);
+        const errorAlert = document.createElement("p")
+        // errorAlert.setAttribute('id', 'errorAlert')
+        const successAlert = document.createElement("p")
+        if (!username || !password) {
+            errorAlert.append('could not register')
+            document.getElementById('registerForm').append(errorAlert)
+        } else {
+            successAlert.append('you have been registered, please log in')
+            document.getElementById('registerForm').append(successAlert)
+            // const ele = document.getElementById('errorAlert')
+            // console.log(ele);
+            // console.log({username, password});
+            await registerUser({username, password});
+            // navigate('/login')
+            
+
+        }
+        
+        // console.log('nr->',newresponse);
         setUsername('');
         setPassword('');
     }
@@ -16,7 +32,7 @@ const Register = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUserna
         return (
             <>
             
-        <div>
+        <div id="registerForm">
             <label>
                 <input type='text' placeholder="username" onChange={(event) => setUsername(event.target.value)} required/>
             </label>
