@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
     try {
         const allPublicRoutines = await getAllPublicRoutines();
-        console.log(allPublicRoutines)
+        // console.log(allPublicRoutines)
         res.send(allPublicRoutines);
     } catch (error) {
         next(error);
