@@ -11,13 +11,19 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
         event.preventDefault();
         const errorAlert = document.createElement("p")
         errorAlert.append("Please enter a valid username/password combination")
-        errorAlert.setAttribute('id', 'error')
-        if ((!username || !password) && !errorAlert) {
+
+        // const errorMsg = document.getElementById('error')
+        
+        if ((username == '' || password == '')) {
+            // errorAlert.setAttribute('id', 'error')
             document.getElementById('loginForm').append(errorAlert)
         }
-        const data = await loginUser({username, password});
-        console.log('data--->' , data.user.username);
+        const data = await loginUser({username, password}); 
+        console.log('data--->' , data);
+        if(data.hasOwnProperty('message')) {
+            document.getElementById('loginForm').append(errorAlert)
 
+        }
         if (data.token) {
             setUser(data.user);
             localStorage.setItem('token', data.token);
@@ -31,9 +37,9 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
         // setPassword('');
     }
     
-    useEffect(()=> {
+    // useEffect(()=> {
 
-        },[user])
+    //     },[user])
         
         return (
         <>

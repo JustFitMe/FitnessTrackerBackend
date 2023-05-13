@@ -7,26 +7,31 @@ const Register = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUserna
     const handleRegister = async(event) => {
         event.preventDefault();
         const errorAlert = document.createElement("p")
+        errorAlert.append('could not register')
         // errorAlert.setAttribute('id', 'errorAlert')
-        const successAlert = document.createElement("p")
-        if (!username || !password) {
-            errorAlert.append('could not register')
+        // setUsername('');
+        // setPassword('');
+
+        // const errorMsg = document.getElementById('error')
+
+        if ((username == '' || password == '') || password.length < 8) {
+            // errorAlert.setAttribute('id', 'error')
             document.getElementById('registerForm').append(errorAlert)
         } else {
-            successAlert.append('you have been registered, please log in')
-            document.getElementById('registerForm').append(successAlert)
             // const ele = document.getElementById('errorAlert')
             // console.log(ele);
-            // console.log({username, password});
+            console.log({username, password});
             await registerUser({username, password});
+            const successAlert = document.createElement("p")
+            successAlert.append('you have been registered, please log in')
+            document.getElementById('registerForm').append(successAlert)
             // navigate('/login')
-            
 
         }
         
         // console.log('nr->',newresponse);
-        setUsername('');
-        setPassword('');
+        // setUsername('');
+        // setPassword('');
     }
         
         return (
