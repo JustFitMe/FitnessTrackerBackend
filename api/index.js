@@ -4,6 +4,12 @@ const {getUserById} = require('../db')
 const jwt = require('jsonwebtoken')
 const {JWT_SECRET} = process.env
 
+const activitiesRouter = require('./activities');
+const routinesRouter = require('./routines');
+const usersRouter = require('./users');
+const routineActivitiesRouter = require('./routineActivities');
+
+
 // GET /api/health
 router.get('/health', function (req, res, next) {
     res.send({message: 'all is well'});
@@ -57,5 +63,6 @@ router.use(function(req, res, next) {
     res.status(404).send({message: 'Not found'});
 });
 
+activitiesRouter
 
 module.exports = router;
