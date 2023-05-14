@@ -3,7 +3,6 @@ const router = express.Router();
 const {getUserById} = require('../db')
 const jwt = require('jsonwebtoken')
 const {JWT_SECRET} = process.env
-
 const activitiesRouter = require('./activities');
 const routinesRouter = require('./routines');
 const usersRouter = require('./users');
