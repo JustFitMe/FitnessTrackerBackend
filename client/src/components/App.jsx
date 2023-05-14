@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import {Header, Routines, Home, Register, Login, Profile, MyRoutines, SingleRoutine} from './index';
 import { getPublicRoutines, getUserRoutines } from '../api/api';
+import Activities from './Activities';
+
 
 
 const App = () => {
@@ -43,7 +45,7 @@ return (
             <Route path='/me' element={<Profile user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route path='/routines' element={<Routines name={name} goal={goal} setIsPublic={setIsPublic} isPublic={isPublic} setGoal={setGoal} setName={setName} token={token} publicRoutines={publicRoutines} setPublicRoutines={setPublicRoutines} user={user} isLoggedIn={isLoggedIn}/>}></Route>
             <Route path='/:username/routines' element={<MyRoutines setSingleRoutine={setSingleRoutine} isLoggedIn={isLoggedIn} user={user} token={token}/>}></Route>
-            <Route path='/activities' element={<h1>This is activities33</h1>}></Route>
+            <Route path='/activities' element={<Activities />}></Route>
             <Route path='/:routineId' element={<SingleRoutine user={user} token={token} isPublic={isPublic} setIsPublic={setIsPublic} name={name} goal={goal} isLoggedIn={isLoggedIn} singleRoutine={singleRoutine} setGoal={setGoal} setName={setName}/>}></Route>
         </Routes>
     </div>
