@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import {Header, Routines, Home, Register, Login, Profile, MyRoutines, SingleRoutine} from './index';
+import {Header, Routines, Home, Register, Login, Profile, MyRoutines, SingleRoutine, A} from './index';
 import { getPublicRoutines, getUserRoutines } from '../api/api';
 
 
